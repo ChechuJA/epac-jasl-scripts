@@ -1,4 +1,4 @@
-name: 'Reusable Workflow: Plan'
+name: "Reusable Workflow: Plan"
 
 on:
   workflow_call:
@@ -51,15 +51,17 @@ jobs:
         run: pwd
       # Meto esto para ver si soluciono el error de no encontrar el .ps1 por no tener instalado el modulo
       - name: Install PowerShell Module
-        run: |
-         Install-Module -Name EnterprisePolicyAsCode -Force
-         Get-Module -ListAvailable
-        shell: pwsh          
+        run: Install-Module -Name EnterprisePolicyAsCode -Force
+        shell: pwsh
+
+      - name: List PowerShell modules
+        run: Get-module -ListAvailable
+        shell: pwsh
 
       - name: Plan
         uses: azure/powershell@v2
         with:
-          inlineScript: './Build-DeploymentPlans.ps1 -PacEnvironmentSelector ${{ inputs.pacEnvironmentSelector }} -InformationAction Continue'
+          inlineScript: "Scripts/Deploy/Build-DeploymentPlans.ps1 -PacEnvironmentSelector ${{ inputs.pacEnvironmentSelector }} -InformationAction Continue"
           azPSVersion: "latest"
 
       - name: Detect Plan File
