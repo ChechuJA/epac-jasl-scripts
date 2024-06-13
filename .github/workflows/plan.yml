@@ -46,9 +46,14 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           enable-AzPSSession: true
           allow-no-subscriptions: true
-          # Imprimo el working porque el inlineScript de Build-deploymentPlans.ps1 no funciona
+      # Imprimo el working porque el inlineScript de Build-deploymentPlans.ps1 no funciona
       - name: Print working directory
         run: pwd
+      # Meto esto para ver si soluciono el error de no encontrar el .ps1 por no tener instalado el modulo
+      - name: Install PowerShell Module
+        run: |
+         Install-Module -Name EnterprisePolicyAsCode -Force
+        shell: pwsh          
 
       - name: Plan
         uses: azure/powershell@v2
