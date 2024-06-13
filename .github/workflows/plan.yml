@@ -53,6 +53,7 @@ jobs:
       - name: Install PowerShell Module
         run: |
          Install-Module -Name EnterprisePolicyAsCode -Force
+         Get-Module -ListAvailable
         shell: pwsh          
 
       - name: Plan
