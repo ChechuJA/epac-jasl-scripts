@@ -46,11 +46,14 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           enable-AzPSSession: true
           allow-no-subscriptions: true
+          # Imprimo el working porque el inlineScript de Build-deploymentPlans.ps1 no funciona
+      - name: Print working directory
+        run: pwd
 
       - name: Plan
         uses: azure/powershell@v2
         with:
-          inlineScript: 'Build-DeploymentPlans.ps1 -PacEnvironmentSelector ${{ inputs.pacEnvironmentSelector }} -InformationAction Continue'
+          inlineScript: './Scripts/Deploy/Build-DeploymentPlans.ps1 -PacEnvironmentSelector ${{ inputs.pacEnvironmentSelector }} -InformationAction Continue'
           azPSVersion: "latest"
 
       - name: Detect Plan File
